@@ -16,23 +16,24 @@ var config = {
   var updateTime = function(){
   	var currentTime = moment();
   	$('#currentTime').html(currentTime.format('LT'));
-  	//Working through the calculation for how long it has been since the train's been running
-  	var currentTime = moment();
-  	var difference = currentTime.diff(firstTrain, "minutes");
-  	console.log("Minutes since first train: " + difference);
 
-  	var frequency = 15;
+    //Working through the calculation for how long it has been since the train's been running
+    var currentTime = moment();
+    var difference = moment(currentTime).diff(firstTrain, "minutes");
+    console.log("Minutes since first train: " + difference);
+
+    var frequency = 15;
   //time since last train
-  	var minsSinceLastTrain = difference % frequency;
-  	console.log("Minutes since last train: " +minsSinceLastTrain);
+    var minsSinceLastTrain = difference % frequency;
+    console.log("Minutes since last train: " +minsSinceLastTrain);
   //time till next train
-  	var timeTillNextTrain = frequency - minsSinceLastTrain;
-  	console.log("Minutes until next train: " + timeTillNextTrain);
+    var timeTillNextTrain = frequency - minsSinceLastTrain;
+    console.log("Minutes until next train: " + timeTillNextTrain);
   //time OF next train
   var nextTrain = moment().add(timeTillNextTrain, "minutes");
   var nextTrainConverted = moment(nextTrain).format("hh:mm a");
   console.log("ARRIVAL TIME: " + moment(nextTrain).format("HH:mm"));
-  
+  	
   }
 
   $(document).ready(function(){
@@ -85,6 +86,7 @@ database.ref().on('child_added', function(childSnapshot, prevChildKey) {
 
 	
 
+  
   
 
 	$('.table > tbody').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>"
